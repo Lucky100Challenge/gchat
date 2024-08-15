@@ -22,50 +22,16 @@ st.set_page_config(
 def ai_sales_coach(user_input):
     if not user_input:
         return "Please provide a valid question or request."
-    elif "!persona" in user_input:
-        return f"""As an expert in sales and marketing, create a detailed buyer's persona based on the following input:
-
-{user_input}
-
-Include the following aspects in your persona:
-1. Demographics (age, gender, income, education, etc.)
-2. Professional background
-3. Goals and challenges
-4. Preferred communication channels
-5. Decision-making process
-6. Key pain points  
-7. Objections they might have
-8. Potential solutions your product/service offers"""
-    elif "!script" in user_input:
-        return f"""As an expert in sales and marketing, create a detailed sales script based on the following input:
-{user_input}
-
-Include the following aspects in your script:
-1. Introduction
-2. Problem identification
-3. Solution presentation
-4. Objections handling
-5. Closing the sale"""
-    elif "!leads" in user_input:
-        return f"""
-How can I find leads who are interested in {user_input}?
-
-Please provide specific, actionable strategies for lead generation, including:
-1. Ideal customer profile
-2. Effective channels for outreach
-3. Content marketing ideas
-4. Networking opportunities
-5. Digital marketing tactics
-6. Any industry-specific recommendations
-"""
+    elif "help" in user_input:
+        return "I'm here to help you with any questions you have about Notion. How can I assist you today?"
     else:
-        return "Please provide a valid question or request."
-
+    
+        prompt = f"""
+        
+        {user_input}
+        """
         llm = GoogleGenerativeAI(model="gemini-pro", google_api_key=api_key)
-        response = llm.generate_text(user_input, max_length=150)
-        return response
-
-
+        return llm.invoke(prompt)
 
 
 with st.sidebar:
